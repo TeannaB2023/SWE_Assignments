@@ -1,0 +1,21 @@
+{
+  "name": "boggle_impl2_after_codereview",
+  "version": "1.0.0",
+  "description": "assignment #3",
+  "main": "boggle_solver.js",
+  "dependencies": {
+    "eslint-plugin-jest": "24.0.2",
+    "node": "14.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.0",
+    "jest": "^26.4.2",
+    "typescript": "^4.0.3"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC"
+}
