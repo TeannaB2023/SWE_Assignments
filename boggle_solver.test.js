@@ -11,7 +11,7 @@ function lowercaseStringArray(stringArray) {
 		stringArray[i] = stringArray[i].toLowerCase();
 }
 
-jest.describe("Boggle Solver tests suite:", () => {
+describe("Boggle Solver tests suite:", () => {
 	describe("Normal input", () => {
 		let grid = [["A", "B", "C", "D"],
 			["E", "F", "G", "H"],
@@ -24,11 +24,11 @@ jest.describe("Boggle Solver tests suite:", () => {
     
 		lowercaseStringArray(expected);
     
-		jest.expect(solutions.sort()).toEqual(expected);
+		expect(solutions.sort()).toEqual(expected);
 	});
 
   
-	jest.describe("Problem contraints", () => {
+	describe("Problem contraints", () => {
 		test("Grid with Qu", () => {
 			let grid = [["T", "W", "Y", "R"],
 				["E", "N", "P", "H"],
@@ -39,10 +39,10 @@ jest.describe("Boggle Solver tests suite:", () => {
       
 			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			jest.expect(solutions.sort()).toEqual(expected);
+			expect(solutions.sort()).toEqual(expected);
 		});
     
-		jest.test("Grid with St", () => {
+		test("Grid with St", () => {
 			let grid = [["T", "W", "Y", "R"],
 				["E", "N", "P", "H"],
 				["G", "St", "Qu","T"],
@@ -52,15 +52,15 @@ jest.describe("Boggle Solver tests suite:", () => {
       
 			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			jest.expect(solutions.sort()).toEqual(expected);
+			expect(solutions.sort()).toEqual(expected);
 		});
 	});
 
   
-	jest.describe("Input edge cases", () => {
+	describe("Input edge cases", () => {
 
 		// Example Test using Jest
-		jest.test("Dictionary is empty", () => {
+		test("Dictionary is empty", () => {
 			// (Edge case) Since there are no possible solutions, it should return an
 			// empty list.
 			let grid = [["A", "B", "C", "D"],
@@ -72,20 +72,20 @@ jest.describe("Boggle Solver tests suite:", () => {
 
 			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
 
-			jest.expect(solutions.sort()).toEqual(expected.sort());
+			expect(solutions.sort()).toEqual(expected.sort());
 		});
     
-		jest.test("Grid is empty", () => {
+		test("Grid is empty", () => {
 			let grid = [[]];
 			let dictionary = ["aba", "bcc"];
 			let expected = [];
       
 			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			jest.expect(solutions).toEqual(expected);
+			expect(solutions).toEqual(expected);
 		});
     
-		jest.test("Grid is jagged", () => {
+		test("Grid is jagged", () => {
 			let grid = [["A", "B", "C"],
 				["H", "J"],
 				["F", "Z", "O", "U"]];
@@ -94,7 +94,7 @@ jest.describe("Boggle Solver tests suite:", () => {
       
 			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			jest.expect(solutions).toEqual(expected);
+			expect(solutions).toEqual(expected);
 		});
 	});
 });
