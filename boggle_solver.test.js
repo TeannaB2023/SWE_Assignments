@@ -44,11 +44,11 @@ describe("Boggle Solver tests suite:", () => {
     
 		test("Grid with St", () => {
 			let grid = [["T", "W", "Y", "R"],
-				["E", "N", "P", "H"],
-				["G", "St", "Qu","T"],
-				["O", "N", "A", "R"]];
-			let dictionary = ["start", "sat", "went"];
-			let expected = ["start", "went"];
+                  ["E", "N", "P", "H"],
+                  ["F", "St", "Qu","T"],
+                  ["I", "R", "A", "R"]];
+			let dictionary = ["start", "sat", "went", "first"];
+			let expected = ["first", "start", "went"];
       
 			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       

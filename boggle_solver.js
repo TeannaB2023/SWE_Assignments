@@ -177,14 +177,3 @@ exports.findAllSolutions = function(grid, dictionary) {
 	}
 	return Array.from(solutions);
 };
-
-
-var grid = [["T", "W", "Y", "R"],
-	["E", "N", "P", "H"],
-	["G", "Z", "Qu", "R"],
-	["St", "N", "T", "A"]];
-var dictionary = ["art", "ego", "gent", "get", "net", "new", "newt", "prat",
-	"pry", "qua", "quart", "quartz", "rat", "tar", "tarp",
-	"ten", "went", "wet", "arty", "egg", "not", "quar"];
-
-console.log(exports.findAllSolutions(grid, dictionary));
