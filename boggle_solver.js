@@ -10,7 +10,6 @@
    * https://www.geeksforgeeks.org/boggle-set-2-using-trie/?ref=rp
    * In Class and Office Hours Instruction from Dr. Burge
  * 
- * Status: DFS skips over tiles (probably based on wrong visited table)
  * Given a Boggle board and a dictionary, returns a list of available words in
  * the dictionary present inside of the Boggle board.
  * @param {string[][]} grid - The Boggle game board.
