@@ -34,6 +34,7 @@ class TrieTree {
 		let node = this.root;
 		for (let i = 0; i < word.length; i++) {
 			// check to see if character node exists in children.
+			console.log(word[i]);
 			if (!node.children[word[i]]) {
 				// if it doesn't exist, we then create it.
 				node.children[word[i]] = new TrieNode(word[i]);
@@ -41,6 +42,7 @@ class TrieTree {
 
 			// proceed to the next depth in the trie.
 			node = node.children[word[i]];
+			console.log(node);
 
 			// finally, we check to see if it's the last word.
 			if (i == word.length-1) {
@@ -70,8 +72,8 @@ class TrieTree {
 	buildTrieTree(words) {
 		for (let i = 0; i < words.length; i++){
 			var word = words[i].toLocaleLowerCase();
-			if (words[i].includes("st") || words[i].includes("qu")) {
-				word = this.combine(words[i]);
+			if (word.includes("st") || word.includes("qu")) {
+				word = this.combine(word);
 			}
 			this.insert(word);
 		}
@@ -121,22 +123,18 @@ var wordSearch = function(row, col, grid, visited, trieTree, foundWord, solution
 		[1, -1],
 		[-1, 1]];
   
-	// console.log(row, col, grid[row][col], visited);
 	if (row < 0 || col < 0 ||
       row >= grid.length || col >= grid.length ||
-      visited[row][col]) {
+      visited[row][col] == true) {
 		return;
 	}
   
 	// build word for search
 	foundWord += grid[row][col];
-	//console.log(foundWord);
-  
-	//console.log(trieTree.isPrefix(foundWord));
+
 	// see if word in trie (find method)
 	if (trieTree.isPrefix(foundWord)) {
-		//visited[row][col] = true;
-		//console.log(visited);
+		visited[row][col] = true;
 
 		//if so check if word (contains method) and greater than 3
 		if (trieTree.isWord(foundWord) && foundWord.length >= 3) {
@@ -152,14 +150,15 @@ var wordSearch = function(row, col, grid, visited, trieTree, foundWord, solution
 
 exports.findAllSolutions = function(grid, dictionary) {
 	let solutions = new Set();
-	if (grid.length != grid[0].length 
-      || grid.length == 0 
+	if (grid.length == 0 
+      || grid.length != grid[0].length 
       || dictionary.length == 0) {
 		return [];
 	}
   
 	var dictTrie = new TrieTree();
 	dictTrie.buildTrieTree(dictionary);
+	console.log(dictTrie);
   
 	// let is locally scoped and var is globally scoped
 	let l = grid.length;
@@ -171,20 +170,9 @@ exports.findAllSolutions = function(grid, dictionary) {
 		}
 		for (let j = 0; j < l; j++) {
 			let foundStr = "";
-			let visited = new Array(l).fill(new Array(l).fill(false));
+			let visited = new Array(l).fill(false).map(() => new Array(l).fill(false));
 			wordSearch(i, j, grid , visited, dictTrie, foundStr, solutions);
 		}
 	}
 	return Array.from(solutions);
 };
-
-
-var grid = [["T", "W", "Y", "R"],
-	["E", "N", "P", "H"],
-	["G", "Z", "Qu", "R"],
-	["St", "N", "T", "A"]];
-var dictionary = ["art", "ego", "gent", "get", "net", "new", "newt", "prat",
-	"pry", "qua", "quart", "quartz", "rat", "tar", "tarp",
-	"ten", "went", "wet", "arty", "egg", "not", "quar"];
-
-console.log(exports.findAllSolutions(grid, dictionary));
