@@ -1,4 +1,4 @@
-const boggle_solver = require("/home/codio/workspace/Boggle_Testing/boggle_solver.js");
+const boggle_solver = require('/home/codio/workspace/Boggle_Testing/boggle_solver.js');
 
 /** 
  * Author: Teanna Barrett @02924893
@@ -7,94 +7,120 @@ const boggle_solver = require("/home/codio/workspace/Boggle_Testing/boggle_solve
  * @param {string[]} stringArray - String array to be lowercase.
  */
 function lowercaseStringArray(stringArray) {
-	for (let i = 0; i < stringArray.length; i++)
-		stringArray[i] = stringArray[i].toLowerCase();
+  for (let i = 0; i < stringArray.length; i++)
+    stringArray[i] = stringArray[i].toLowerCase();
 }
 
-describe("Boggle Solver tests suite:", () => {
-	describe("Normal input", () => {
-		let grid = [["A", "B", "C", "D"],
-			["E", "F", "G", "H"],
-			["I", "J", "K", "L"],
-			["A", "B", "C", "D"]];
-		let dictionary = ["ABEF", "AFJIEB", "DGKD", "DGKA"];
-		let expected = ["ABEF", "AFJIEB", "DGKD"];
+describe('Boggle Solver tests suite:', () => {
+  test('Normal input', () => {
+    // This test covers finds valid words, recurse on the diagonal, non-adjacent letters
+    let grid = [['A', 'B', 'C', 'D'],
+                ['E', 'F', 'G', 'H'],
+                ['I', 'J', 'K', 'L'],
+                ['A', 'B', 'C', 'D']];
+    let dictionary = ['ABEF', 'AFJIEB', 'DGKD', 'DGKA'];
+    let expected = ['ABEF', 'AFJIEB', 'DGKD'];
     
-		let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+    let solutions = boggle_solver.findAllSolutions(grid, dictionary);
     
-		lowercaseStringArray(expected);
+    lowercaseStringArray(expected);
     
-		expect(solutions.sort()).toEqual(expected);
-	});
+    expect(solutions.sort()).toEqual(expected);
+  });
 
   
-	describe("Problem contraints", () => {
-		test("Grid with Qu", () => {
-			let grid = [["T", "W", "Y", "R"],
-				["E", "N", "P", "H"],
-				["G", "Z", "Qu", "R"],
-				["O", "E", "B", "E"]];
-			let dictionary = ["ten","querbe", "qerbe"];
-			let expected = ["querbe", "ten"];
+  describe('Problem contraints', () => {
+    test('Grid with Qu', () => {
+      let grid = [['T', 'W', 'Y', 'R'],
+                  ['E', 'N', 'P', 'H'],
+                  ['G', 'A', 'Qu', 'R'],
+                  ['O', 'E', 'B', 'E']];
+      let dictionary = ['ten','querbe', 'qerbe', 'aqu', 'uqe'];
+      let expected = ['aqu','querbe', 'ten'];
       
-			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+      let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			expect(solutions.sort()).toEqual(expected);
-		});
+      expect(solutions.sort()).toEqual(expected);
+    });
     
-		test("Grid with St", () => {
-			let grid = [["T", "W", "Y", "R"],
-                  ["E", "N", "P", "H"],
-                  ["F", "St", "Qu","T"],
-                  ["I", "R", "A", "R"]];
-			let dictionary = ["start", "sat", "went", "first"];
-			let expected = ["first", "start", "went"];
+    test('Grid with St', () => {
+      let grid = [['T', 'W', 'Y', 'R'],
+                  ['E', 'N', 'P', 'H'],
+                  ['I', 'St', 'Qu','T'],
+                  ['F', 'R', 'A', 'R']];
+      let dictionary = ['start', 'sat', 'went', 'first', 'sass'];
+      let expected = ['first','start', 'went'];
       
-			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+      let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			expect(solutions.sort()).toEqual(expected);
-		});
-	});
+      expect(solutions.sort()).toEqual(expected);
+    });
+  });
 
   
-	describe("Input edge cases", () => {
+  describe('Input edge cases', () => {
 
-		// Example Test using Jest
-		test("Dictionary is empty", () => {
-			// (Edge case) Since there are no possible solutions, it should return an
-			// empty list.
-			let grid = [["A", "B", "C", "D"],
-				["E", "F", "G", "H"],
-				["I", "J", "K", "L"],
-				["M", "N", "O", "P"]];
-			let dictionary = [];
-			let expected = [];
+    // Example Test using Jest
+    test('Dictionary is empty', () => {
+      // (Edge case) Since there are no possible solutions, it should return an
+      // empty list.
+      let grid = [['A', 'B', 'C', 'D'],
+                    ['E', 'F', 'G', 'H'],
+                    ['I', 'J', 'K', 'L'],
+                    ['M', 'N', 'O', 'P']];
+      let dictionary = [];
+      let expected = [];
 
-			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+      let solutions = boggle_solver.findAllSolutions(grid, dictionary);
 
-			expect(solutions.sort()).toEqual(expected.sort());
-		});
+      expect(solutions.sort()).toEqual(expected.sort());
+    });
     
-		test("Grid is empty", () => {
-			let grid = [[]];
-			let dictionary = ["aba", "bcc"];
-			let expected = [];
+    test('Grid is empty', () => {
+      let grid = [];
+      let dictionary = ['aba', 'bcc'];
+      let expected = [];
       
-			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+      let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			expect(solutions).toEqual(expected);
-		});
+      expect(solutions).toEqual(expected);
+    });
     
-		test("Grid is jagged", () => {
-			let grid = [["A", "B", "C"],
-				["H", "J"],
-				["F", "Z", "O", "U"]];
-			let dictionary = ["abc", "zjhf", "uuu"];
-			let expected = [];
+    test('Grid is jagged', () => {
+      let grid = [['A', 'B', 'C'],
+                   ['H', 'J'],
+                   ['F', 'Z', 'O', 'U']];
+      let dictionary = ['abc', 'zjhf', 'uuu'];
+      let expected = [];
       
-			let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+      let solutions = boggle_solver.findAllSolutions(grid, dictionary);
       
-			expect(solutions).toEqual(expected);
-		});
-	});
+      expect(solutions).toEqual(expected);
+    });
+    
+    test('< 3 word length', () => {
+      let grid = [['H', 'B', 'C'],
+                   ['I', 'O', 'H'],
+                   ['Y', 'Z', 'O']];
+      let dictionary = ['hi', 'bo', 'yo'];
+      let expected = [];
+      
+      let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+      
+      expect(solutions).toEqual(expected);
+    });
+    
+    test('Repeated letters', () => {
+      let grid = [['A', 'T', 'Y', 'R'],
+                  ['F', 'A', 'G', 'O'],
+                  ['I', 'A', 'Qu','B'],
+                  ['F', 'R', 'A', 'R']];
+      let dictionary = ['aaa', 'obo', 'go', 'fifty'];
+      let expected = ['aaa', 'fifty'];
+      
+      let solutions = boggle_solver.findAllSolutions(grid, dictionary);
+      
+      expect(solutions.sort()).toEqual(expected);
+    });
+  });
 });
